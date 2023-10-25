@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">appRemedio</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="novo_remedio_fragment_label">Novo Remedio Fragment</string>
+    <string name="consumo_view_fragment_label">Consumo View Fragment</string>
+
+    <string name="lorem_ipsum">
+        Editado por brenno
+    </string>
+    <string name="lorem_ipsum2">
+        Editado por brenno2
+    </string>
+    <string name="todo">TODO</string>
+    <string name="digite_seu_texto">Digite seu Texto</string>
+    <string name="nomepessoa">Nome da Pessoa</string>
+    <string name="data_nascimento">Data de Nascimento</string>
+    <string name="salvar">Salvar</string>
+    <string name="nomeremedio">Nome do remedio</string>
+    <string name="element_text">itemelement</string>
+    <string name="tipo_remedio">Tipo de remedio</string>
+    <string name="data_inicio">Data de Inicio</string>
+    <string name="hora_inicio">Hora de inicio</string>
+    <string name="novo_remedio_pessoa_fragment_label">Novo Remedio Pessoa Fragment\n</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="data_hora_inicio">Data/Hora Inicio</string>
+    <string name="intervalo">Intervalo de uso</string>
+    <string name="nome">nome</string>
+    <string name="quantidade">Quantidade/Tempo</string>
+    <string name="novo_remedio">Novo Remedio</string>
+</resources>
