@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -39,13 +40,13 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setSupportActionBar(binding.toolbar)
+
 
         binding.fab.setOnClickListener {
             val navController = findNavController(R.id.nav_host_fragment_content_main)
             navController.navigate(R.id.NovoRemedioPessoaViewFragment)
-            menuVar.clear()
+
         }
     }
 
@@ -53,13 +54,13 @@ class MainActivity : AppCompatActivity() {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
         menuVar = menu
+        binding.toolbar.menu[0].isVisible = true
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         navController.navigate(R.id.NovoRemedioViewFragment)
-        menuVar.clear()
         return when (item.itemId) {
             R.id.action_remedio -> true
             else -> super.onOptionsItemSelected(item)

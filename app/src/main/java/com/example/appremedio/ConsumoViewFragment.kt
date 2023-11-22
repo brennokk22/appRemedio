@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Spinner
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +19,7 @@ import com.example.appremedio.utils.Converters
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 /**
@@ -27,7 +29,8 @@ class ConsumoViewFragment : Fragment() {
 
     private var _binding: FragmentConsumoViewBinding? = null
     lateinit var db: AppDataBase
-    private lateinit var spinner: Spinner
+
+    //private lateinit var spinner: Spinner
     private lateinit var recycler: RecyclerView
 
 
@@ -36,13 +39,13 @@ class ConsumoViewFragment : Fragment() {
     private val binding get() = _binding!!
 
 
-
     override fun onCreateView(
 
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         (requireActivity() as MainActivity).binding.fab.show()
+
         db = InstanceDb.INSTANCE
         _binding = FragmentConsumoViewBinding.inflate(inflater, container, false)
         return binding.root
@@ -50,27 +53,33 @@ class ConsumoViewFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        spinner = view.findViewById(R.id.spinner)
-        recycler = view.findViewById(R.id.recyclerView)
-        CoroutineScope(Dispatchers.IO).launch {
-            val remedios = db.RemedioDao().buscarRemedios()
-            val consumos = db.ConsumoDao().buscarConsumoOrdernado()
-            val listConsumo: ArrayList<String> = java.util.ArrayList()
-            for (item in consumos) {
-                val idRemedio =
-                    db.PessoaRemedioDao().buscarPessoaRemediosId(item.idPessoaRemedio)[0].idRemedio
-                val nomeRemedio =
-                    db.RemedioDao().buscaRemedioId(idRemedio)[0].nome
-                val dataString = Converters.longToStringDate(item.datetimeAgendado)
-                listConsumo.add("$nomeRemedio - $dataString")
-            }
-            withContext(Dispatchers.Main) {
-                ConfigElements.setupSpinner(requireContext(), spinner, remedios)
-                ConfigElements.setupRecycler(requireContext(), recycler, listConsumo)
-            }
+        //spinner = view.findViewById(R.id.spinner)
+        try {
+            (requireActivity() as MainActivity).binding.toolbar.menu[0].isVisible = true
+        } catch (e: Exception){
 
         }
-    }
+        recycler = view.findViewById(R.id.recyclerView)
+        val listConsumo: ArrayList<String> = java.util.ArrayList()
+        runBlocking(Dispatchers.IO) {
+
+                val remedios = db.RemedioDao().buscarRemedios()
+                val consumos = db.ConsumoDao().buscarConsumoOrdernado()
+                for (item in consumos) {
+                    val idRemedio =
+                        db.PessoaRemedioDao()
+                            .buscarPessoaRemediosId(item.idPessoaRemedio)[0].idRemedio
+                    val nomeRemedio =
+                        db.RemedioDao().buscaRemedioId(idRemedio)[0].nome
+                    val dataString = Converters.longToStringDate(item.datetimeAgendado)
+                    listConsumo.add("$nomeRemedio - $dataString")
+                }
+            }
+
+            //ConfigElements.setupSpinner(requireContext(), spinner, remedios)
+            ConfigElements.setupRecycler(requireContext(), recycler, listConsumo)
+        }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

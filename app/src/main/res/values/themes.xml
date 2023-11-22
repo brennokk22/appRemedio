@@ -2,10 +2,12 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.AppRemedio" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:spinnerStyle">@style/BordaArredondada</item>
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:buttonStyle">@style/buttonStyle</item>
     </style>
 
-    <style name="Theme.AppRemedio" parent="Base.Theme.AppRemedio" />
+    <style name="buttonStyle">
+        <item name="android:backgroundTint">@color/color_toolbar</item>
+    </style>
+
 
 </resources>

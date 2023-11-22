@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">appRemedio</string>
+    <string name="app_name">PharmNotify</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="novo_remedio_fragment_label">Novo Remedio Fragment</string>
@@ -29,4 +29,6 @@
     <string name="nome">nome</string>
     <string name="quantidade">Quantidade/Tempo</string>
     <string name="novo_remedio">Novo Remedio</string>
+    <string name="title_activity_splash">splash</string>
+    <string name="data_invalida">*DATA INVALIDA</string>
 </resources>

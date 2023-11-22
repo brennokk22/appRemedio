@@ -2,10 +2,12 @@ package com.example.appremedio
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import com.example.appremedio.db.AppDataBase
 import com.example.appremedio.db.InstanceDb
@@ -42,6 +44,7 @@ class NovoRemedioViewFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (requireActivity() as MainActivity).binding.toolbar.menu[0].isVisible = false
         val cadastrarButton = view.findViewById<Button>(R.id.button)
         cadastrarButton.setOnClickListener {
             val nome = view.findViewById<EditText>(R.id.editTextNome).text.toString()
